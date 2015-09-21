@@ -1,0 +1,61 @@
+#!/bin/bash
+#set -x
+
+#zh_TW.UTF-8  : traditional Chinese, Twaiwn UTF-8
+#zh_TW.Big5   : traditional Chinese, Twaiwn big5
+#zh_CN.UTF-8  : simplified  Chinese, China UTF-8
+#zh_CN.GB2312 : simplified  Chinese, China GB2312
+#en_US.UTF-8  : English			   , USA UTF-8
+
+help(){
+        echo -e "\033[1;31mUsage:\033[00m"
+        echo -e "      \033[1;31m`basename $0` inputFile [OPTION] [OUTPUT-FILE-NAME]\033[00m"
+        echo
+        echo "description:"
+        echo "       This command is used for convert Traditional Chinese to UTF8 format for vim to read"
+		echo "		 OPTION:"
+		echo "			stdout"
+		echo "				output the converting on terminal"
+		echo "			output"
+		echo "				output the converting to OUTPUT-FILE-NAME"
+		echo "			overwrite"
+		echo "				output the converting to inputFile"
+        echo -e "	  		        \033[1;31mCAUTION: THIS COMMAND WILL OVERWRITE THE ORIGINAL FILE\033[00m"
+        echo
+        echo "example:"
+        echo "       `basename $0` test.txt"
+        echo "       `basename $0` test.txt stdout"
+        echo "       `basename $0` test.txt output output.txt"
+        echo "       `basename $0` test.txt overwrite"
+        echo
+        exit
+}
+
+
+if [ "$1" = "-h" -o $# -le 3 ]; then     
+	inputFile="$1"
+	if [ $# -eq 1 ]; then
+		method=""
+	elif [ $# -eq 2 ]; then
+		method=$2
+	elif [ $# -eq 3 ]; then
+		method=$2
+		outputFile=$3
+	else
+		help
+	fi
+fi
+
+#use "${name}" to avoid the fileName with space in it!
+if [ ! -f "${inputFile}" ]; then
+	echo "${inputFile} is NOT FOUND!"	
+	exit
+fi
+
+case ${method} in
+"stdout"| "") iconv "${inputFile}" -f big5 -t utf8;;
+"output") iconv "${inputFile}" -f big5 -t utf8 -o "${outputFile}";;
+"overwrite") iconv "${inputFile}" -f big5 -t utf8 -o "${inputFile}";;
+*) help;;
+esac
+

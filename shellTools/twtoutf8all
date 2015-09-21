@@ -1,0 +1,43 @@
+#!/bin/bash
+#set -x
+help(){
+        echo -e "\033[1;31mUsage:\033[00m"
+        echo -e "      \033[1;31m`basename $0` inputFile [OPTION] [OUTPUT-FILE-NAME]\033[00m"
+        echo
+        echo "description:"
+        echo "       This command is used for convert ALL Traditional Chinese to UTF8 format for vim to read" in DIR
+		echo "		 OPTION:"
+		echo "			stdout"
+		echo "				output the converting on terminal"
+		echo "			overwrite"
+		echo "				output the converting to inputFile"
+        echo -e "	  		        \033[1;31mCAUTION: THIS COMMAND WILL OVERWRITE THE ORIGINAL FILE\033[00m"
+        echo
+        echo "example:"
+        echo "       `basename $0` \"*.java\""
+        echo "       `basename $0` \"*.java\" stdout"
+        echo "       `basename $0` \"*.java\" overwrite"
+        echo
+        exit
+}
+
+if [ "$1" = "-h" -o $# -le 3 ]; then     
+	inputFile="$1"
+	if [ "$1" == "-h" ]; then
+		help
+	elif [ $# -eq 1 ]; then
+		method=""
+	elif [ $# -eq 2 ]; then
+		method=$2
+	else # if $# -eq 0
+		help
+	fi
+fi
+
+case ${method} in
+"stdout"| "") find . -type f -name "${inputFile}" -exec echo -e "\n\n=====> {} <======" \; -exec twtoutf8 '{}' stdout \; ;;
+"overwrite") find . -type f -name "${inputFile}" -exec echo -e "=====> {} <======" \; -exec twtoutf8 '{}' overwrite \; ;;
+*) help;;
+esac
+
+#set +x
