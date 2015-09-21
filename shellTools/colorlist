@@ -1,0 +1,57 @@
+#!/bin/bash
+#  The escape magic is:
+#  <esc code>[<attribute>;<fg>;<bg>m
+#
+#  <esc code> is:   <attribute> can be:                                <fg> is:         <bg> is:  
+#     \e            0 - Reset All Attributes (return to normal mode)   30 Black         40 Black  
+#     or            1 - Bright (Usually turns on BOLD)                 31 Red           41 Red    
+#     \033          2 - Dim                                            32 Green         42 Green  
+#                   3 - Underline                                      33 Yellow        43 Yellow 
+#                   5 - Blink                                          34 Blue          44 Blue   
+#                   7 - Reverse                                        35 Magenta       45 Magenta
+#                   8 - Hidden                                         36 Cyan          46 Cyan
+
+# bg
+RED="\033[01;31m"
+GREEN="\033[01;32m"
+YELLOW="\033[01;33m"
+BLUE="\033[01;34m"
+MEGENTA="\033[01;35m"
+CYAN="\033[01;36m"
+
+ENDCOLOR="\033[00m"
+
+# fg
+DARKRED="\033[31m"
+DARKGREEN="\033[32m"
+DARKYELLOW="\033[33m"
+DARKBLUE="\033[34m"
+DARKMEGENTA="\033[35m"
+DARKCYAN="\033[36m"
+
+
+echo
+printf "${RED}bold red${ENDCOLOR}        ${DARKRED}dark red${ENDCOLOR}\n"
+printf "${GREEN}bold green${ENDCOLOR}      ${DARKGREEN}dark green${ENDCOLOR}\n"
+printf "${YELLOW}bold yellow${ENDCOLOR}     ${DARKYELLOW}dark yellow${ENDCOLOR}\n"
+printf "${BLUE}bold blue ${ENDCOLOR}      ${DARKBLUE}dark blue ${ENDCOLOR}\n"
+printf "${MEGENTA}bold magenta${ENDCOLOR}    ${DARKMEGENTA}dark magenta${ENDCOLOR}\n"
+printf "${CYAN}bold cyan ${ENDCOLOR}      ${DARKCYAN}dark cyan ${ENDCOLOR}\n"
+echo "-------------------------------------------------------"
+echo "colorName     |   var-name     |  color code"
+echo "-------------------------------------------------------"
+printf "${RED}bold red${ENDCOLOR}           RED            "; echo ${RED}
+printf "${DARKRED}dark red${ENDCOLOR}           DARKRED        ";echo ${DARKRED}
+printf "\n${GREEN}bold green${ENDCOLOR}         GREEN          "; echo ${GREEN}
+printf "${DARKGREEN}dark green${ENDCOLOR}         DARKGREEN      ";echo ${DARKGREEN}
+printf "\n${YELLOW}bold yellow${ENDCOLOR}        YELLOW         "; echo ${YELLOW}
+printf "${DARKYELLOW}dark yellow${ENDCOLOR}        DARKYELLOW     ";echo ${DARKYELLOW}
+printf "\n${BLUE}bold blue${ENDCOLOR}          BLUE           "; echo ${BLUE}
+printf "${DARKBLUE}dark blue${ENDCOLOR}          DARKBLUE       ";echo ${DARKBLUE}
+printf "\n${MEGENTA}bold megenta${ENDCOLOR}       MEGENTA        "; echo ${MEGENTA}
+printf "${DARKMEGENTA}dark megenta${ENDCOLOR}       DARKMEGENTA    ";echo ${DARKMEGENTA}
+printf "\n${CYAN}bold cyan${ENDCOLOR}          CYAN           "; echo ${CYAN}
+printf "${DARKCYAN}dark cyan${ENDCOLOR}          DARKCYAN       ";echo ${DARKCYAN}
+printf "\nend color mark     ENDCOLOR       "; echo ${ENDCOLOR}
+echo
+
