@@ -1,0 +1,13 @@
+1: remove *.class files in dirs
+
+way-1: find commands
+--------------------
+find -type f -name *.class -exec rm {} \;
+
+way-2: use git
+---------------
+cd /path/to/source/code/
+echo *.class>.gitignore
+git init; git add .;git commit -m"commit msg"
+cd to/Some/Folder
+git clone /path/to/source/code/.git 
