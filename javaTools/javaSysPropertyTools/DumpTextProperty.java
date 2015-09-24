@@ -3,7 +3,7 @@
 import java.util.Properties;;
 import java.util.Enumeration;;
 
-public class dumpTextProperty {
+public class DumpTextProperty {
 	public static void main(String[] args) {
 		Properties p = System.getProperties();
 		Enumeration keys = p.keys();
