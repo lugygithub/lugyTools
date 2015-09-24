@@ -1,6 +1,8 @@
 all:
-	javac dumpTextProperty.java
-run:
-	java dumpTextProperty
+	javac *.java
+runtext:
+	java DumpTextProperty
+runui:
+	java DumpSystemPropertiesUI
 clean:
-	rm dumpTextProperty.class
+	rm *.class
