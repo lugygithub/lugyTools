@@ -3,6 +3,8 @@
 way-1: find commands
 --------------------
 find -type f -name *.class -exec rm {} \;
+or
+find -type f -name *.class -delete
 
 way-2: use git
 ---------------
@@ -11,3 +13,10 @@ echo *.class>.gitignore
 git init; git add .;git commit -m"commit msg"
 cd to/Some/Folder
 git clone /path/to/source/code/.git 
+
+2: find all compile.bat files in all dirs
+find -type f -name compile.bat -exec echo ">>>>> {} <<<<<" \; -exec tail -n 100 {} \; -exec echo -e "\n" \;
+
+3: 
+`read -n 1` ---> read 1 byte
+`read` 	  ---> read 1-line
