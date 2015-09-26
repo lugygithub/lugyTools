@@ -4,7 +4,7 @@
 # This script will remove all *.class/*.jar/*.bat and convert all *.java to utf-8 format, and then transform all *.bat into one Makefile 
 #
 # usage: cd ~/sourceCode/BookSourceCode/7-digging-java-Swing/7-digging-java-Swing-utf8-study/
-#		 `creaeMakefile.sh`
+#        `creaeMakefile.sh`
 
 outputDir="build"
 rootDir="Sources"
@@ -25,7 +25,7 @@ convertFile(){
 				if [[ "${javaCmd}" = ""  ]];then
 					echo -e "\t@${line} " >> Makefile
 				else
-					classFiles="${line#java }" # there is a the leading space, `echo $line` will not show it, but `echo "${line}" can show it!
+					classFiles="${line#java }" # there is a leading space, `echo $line` will not show it, but `echo "${line}" can show it!
 					echo -e "\t@java -cp ${outputDir} ${classFiles} " >> Makefile
 				fi
 				;;
@@ -44,11 +44,7 @@ convertFile(){
 }
 
 createMakefile(){
-
 	for f in *.bat; do # not all folders have makeJ*.bat or runJ*.bat
-
-		#echo "filename = ${f}"
-
 		case ${f} in
 			compile.bat) 
 				echo "all:" > Makefile
@@ -105,14 +101,12 @@ for dotBatFile in `find ${rootDir} -type f -name *.bat`; do # not all folders ha
 	# if *.bat are removed, just pass this dir
 	if [[ -f ${makeFile} ]]; then continue; fi
 
-	# convert  0x0d0a to 0x0a
-
 	# cd to *.bat folder
 	oldDir=`pwd`
 	cd ${batFileDir}
-	
 
-	echo -e "\n<<<<< create `pwd`<<<<<<<<<<<<<<<<<"
+	echo -e "\n<<<< create Makefile in `pwd`<<<<<<<<"
+	# convert  0x0d0a to 0x0a
 	dos2unix *.bat
 	createMakefile
 
